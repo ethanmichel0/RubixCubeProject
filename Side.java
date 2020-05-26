@@ -1,10 +1,10 @@
 import java.util.TreeMap;
 @SuppressWarnings("unused")
 public class Side {
-	public String color;
+	private String color;
 	
 	// top to bottom, left to right (y coordinate before x coordinate)
-	public Square[][] position;
+	private Square[][] position;
 	
 	// constructor
 	public Side(String color, Square a, Square b, Square c, Square d, Square e, Square f, Square g, Square h, Square i) {
@@ -21,13 +21,13 @@ public class Side {
 		this.position[2][2] = i;
 	}
 	
-	// local to one side as the side isn't taken in as a parameter
+	// rotates 4 squares, local to one side
 	public void rotate4(int aY, int aX, int bY, int bX, int cY, int cX, int dY, int dX) {
-		Square temp = this.position[aY][aX];
-		this.position[aY][aX] = this.position[dY][dX];
-		this.position[dY][dX] = this.position[cY][cX];
-		this.position[cY][cX] = this.position[bY][bX];
-		this.position[bY][bX] = temp;
+		String temp = this.position[aY][aX].getColor();
+		this.position[aY][aX].changeColor(this.position[dY][dX].getColor());;
+		this.position[dY][dX].changeColor(this.position[cY][cX].getColor());
+		this.position[cY][cX].changeColor(this.position[bY][bX].getColor());
+		this.position[bY][bX].changeColor(temp);
 	}
 	
 	
@@ -56,5 +56,17 @@ public class Side {
 			}
 		}
 		return faceColors;
+	}
+	
+	public Square getSquare(int x, int y) {
+		return this.position[x][y];
+	}
+	
+	public void changeSquare(int x, int y, String color) {
+		this.position[x][y].changeColor(color);
+	}
+	
+	public String getColor() {
+		return this.color;
 	}
 }

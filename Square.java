@@ -1,6 +1,6 @@
 
 public class Square {
-	protected String color;
+	private String color;
 	public Square(String color) {
 		this.color = color;
 	}
